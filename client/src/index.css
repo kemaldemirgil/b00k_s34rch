@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Special+Elite&display=swap');
+
 body {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Special Elite', cursive;
+  background-image: url(./brickwall.png);
 }
 
 h1,
@@ -8,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+  font-family: 'Nothing You Could Do', cursive;
 }
 
 .small {

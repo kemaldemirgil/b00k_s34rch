@@ -97,7 +97,7 @@ const SearchBooks = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+                <Button type='submit' variant='info' size='lg'>
                   Submit Search
                 </Button>
               </Col>
@@ -110,7 +110,7 @@ const SearchBooks = () => {
         <h2>
           {searchedBooks.length
             ? `Viewing ${searchedBooks.length} results:`
-            : 'Search for a book to begin'}
+            : 'Search for a book to begin...'}
         </h2>
         <CardColumns>
           {searchedBooks.map((book) => {
