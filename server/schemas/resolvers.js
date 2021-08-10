@@ -1,39 +1,39 @@
-const { User } = require('../models');
-const { AuthenticationError } = require('apollo-server-express');
-const { signToken } = require('../utils/auth');
+const { User } = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    
     // me
     me: async (parent, args, context) => {
       if (context.user) {
-        return await User.findOne({ _id: context.user._id });
+        return await User.find();
       }
     },
 
     // users
     users: async () => {
-      return await User.find().select('-__v -password').populate('savedBooks');
+      return await User.find().select("-__v -password").populate("savedBooks");
     },
 
     // user
     user: async (parent, { username }) => {
-      return await User.findOne({ username }).select('-__v -password').populate('savedBooks');
-    }
+      return await User.findOne({ username })
+        .select("-__v -password")
+        .populate("savedBooks");
+    },
   },
 
   Mutation: {
-
     // login
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
-        throw new AuthenticationError('Incorrect Information...');
+        throw new AuthenticationError("Incorrect Information...");
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect Password...');
+        throw new AuthenticationError("Incorrect Password...");
       }
       const token = signToken(user);
       return { token, user };
@@ -56,7 +56,7 @@ const resolvers = {
         );
         return updatedUser;
       }
-      throw new AuthenticationError('Request Error...');
+      throw new AuthenticationError("Request Error...");
     },
 
     // removeBook
@@ -69,8 +69,8 @@ const resolvers = {
         );
         return updatedUser;
       }
-      throw new AuthenticationError('Please Login...')
-    }
+      throw new AuthenticationError("Please Login...");
+    },
   },
 };
 
